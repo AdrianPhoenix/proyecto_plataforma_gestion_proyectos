@@ -1,5 +1,5 @@
 import api from './api';
-import { NotificationResponse } from '../types/notification';
+import type { NotificationResponse, Notification } from '../types/notification';
 
 export const notificationService = {
   // Obtener notificaciones del usuario
@@ -21,6 +21,6 @@ export const notificationService = {
   // Obtener conteo de no leídas
   getUnreadCount: async (): Promise<number> => {
     const response = await api.get('/notifications/');
-    return response.data.results.filter((n: any) => !n.is_read).length;
+    return response.data.results.filter((n: Notification) => !n.is_read).length;
   }
 };

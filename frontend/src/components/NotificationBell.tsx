@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { notificationService } from '../services/notificationService';
-import { Notification } from '../types/notification';
+import type { Notification } from '../types/notification';
 
 const NotificationBell: React.FC = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
