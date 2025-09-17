@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import Project, ProjectMember
 from .serializers import ProjectSerializer, ProjectCreateSerializer, ProjectMemberSerializer
+from notifications.services import NotificationService
 
 class ProjectListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
@@ -51,7 +52,9 @@ def add_project_member(request, project_id):
         
         serializer = ProjectMemberSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(project=project)
+            project_member = serializer.save(project=project)
+            # Notificar al usuario asignado al proyecto
+            NotificationService.notify_project_assigned(project_member)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
