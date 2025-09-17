@@ -1,144 +1,209 @@
-# 🚀 Guía de Despliegue
+# 🚀 Guía de Despliegue - ProjectHub
 
-## 📋 Preparación
+Esta guía detalla el proceso completo de despliegue de la aplicación fullstack en producción.
 
-### 1. Backend en Railway
+## 🌐 **URLs de Producción Actuales**
 
-#### Paso 1: Crear cuenta en Railway
-1. Ve a [railway.app](https://railway.app)
-2. Regístrate con GitHub
-3. Conecta tu repositorio
+- **Frontend**: https://proyecto-plataforma-gestion-proyect.vercel.app
+- **Backend**: https://proyectoplataformagestionproyectos-production-a320.up.railway.app
+- **API**: https://proyectoplataformagestionproyectos-production-a320.up.railway.app/api
+- **Admin**: https://proyectoplataformagestionproyectos-production-a320.up.railway.app/admin
 
-#### Paso 2: Configurar Variables de Entorno
-En Railway, ve a Variables y agrega EXACTAMENTE estas credenciales:
+## 📋 **Stack de Producción**
 
+- **Backend**: Railway (Django + PostgreSQL)
+- **Frontend**: Vercel (React + TypeScript)
+- **Base de datos**: Supabase (PostgreSQL)
+- **Autenticación**: JWT
+- **CORS**: Configurado para comunicación entre servicios
+
+## 🔧 **Configuración de Railway (Backend)**
+
+### Variables de Entorno Requeridas:
 ```env
 SECRET_KEY=django-insecure-jwgyxeu4yi=6eqz#xsgdqbfrzs^n38+=#oky6y9#sibiyjfx3y
 DEBUG=False
-ALLOWED_HOST=tu-app.railway.app
+ALLOWED_HOST=proyectoplataformagestionproyectos-production-a320.up.railway.app
+PORT=8000
 
-# Supabase Database (credenciales reales)
+# Base de datos Supabase
 DB_NAME=postgres
 DB_USER=postgres.ipdwhkwqmzoymyiswktl
 DB_PASSWORD=sly34lmpll
 DB_HOST=aws-1-sa-east-1.pooler.supabase.com
 DB_PORT=6543
 
-# Frontend URL (después de desplegar en Vercel)
-FRONTEND_URL=https://tu-app.vercel.app
+# Frontend URL para CORS
+FRONTEND_URL=https://proyecto-plataforma-gestion-proyect.vercel.app
 ```
 
-#### Paso 3: Desplegar
-1. Railway detectará automáticamente Django
-2. Usará el `Procfile` para el comando de inicio
-3. Ejecutará migraciones automáticamente
+### Configuración del Proyecto:
+- **Root Directory**: `backend`
+- **Build Command**: Automático (Railpack)
+- **Start Command**: Definido en `Procfile`
+- **Python Version**: `3.11.10` (definido en `runtime.txt`)
 
-### 2. Frontend en Vercel
+### Archivos de Configuración:
+- `Procfile`: Comando de inicio para Railway
+- `runtime.txt`: Versión de Python
+- `requirements.txt`: Dependencias Python
 
-#### Paso 1: Preparar el Frontend
-Actualiza la URL del API en el frontend:
+## ▲ **Configuración de Vercel (Frontend)**
 
-```typescript
-// frontend/src/services/api.ts
-const API_BASE_URL = import.meta.env.VITE_API_URL || 
-  (import.meta.env.MODE === 'production' 
-    ? 'https://tu-app.railway.app/api'
-    : 'http://localhost:8000/api');
-```
-
-#### Paso 2: Desplegar en Vercel
-1. Ve a [vercel.com](https://vercel.com)
-2. Conecta tu repositorio
-3. Configura:
-   - Framework: React
-   - Root Directory: `frontend`
-   - Build Command: `pnpm run build`
-   - Output Directory: `dist`
-
-#### Paso 3: Variables de Entorno en Vercel
+### Variables de Entorno:
 ```env
-VITE_API_URL=https://tu-app.railway.app/api
+VITE_API_URL=https://proyectoplataformagestionproyectos-production-a320.up.railway.app/api
 ```
 
-## 🔧 Configuración Final
+### Configuración del Proyecto:
+- **Framework**: Vite
+- **Root Directory**: `frontend`
+- **Build Command**: `pnpm run build`
+- **Output Directory**: `dist`
+- **Install Command**: `pnpm install`
 
-### 1. Actualizar CORS en Railway
-Después de obtener la URL de Vercel, actualiza la variable:
-```env
-FRONTEND_URL=https://tu-app-real.vercel.app
-```
+### Archivos de Configuración:
+- `vercel.json`: Configuración de rutas SPA
+- `package.json`: Dependencias y scripts
 
-### 2. Probar la Aplicación
-1. Ve a tu URL de Vercel
-2. Registra un usuario
-3. Crea un proyecto
-4. Verifica que todo funcione
+## 🐘 **Configuración de Supabase (Base de Datos)**
 
-## 📊 Monitoreo
+### Credenciales de Conexión:
+- **Host**: `aws-1-sa-east-1.pooler.supabase.com`
+- **Puerto**: `6543`
+- **Base de datos**: `postgres`
+- **Usuario**: `postgres.ipdwhkwqmzoymyiswktl`
+- **Contraseña**: `sly34lmpll`
 
-### Railway
-- Logs en tiempo real
-- Métricas de uso
-- 500 horas gratis/mes
+### Configuración:
+- **Región**: AWS South America (São Paulo)
+- **Pooler**: Habilitado para conexiones concurrentes
+- **SSL**: Requerido
 
-### Vercel
-- Analytics incluidos
-- Edge functions
-- Despliegues automáticos
+## 🔄 **Proceso de Despliegue**
 
-## 🔒 Seguridad
-
-### Checklist de Producción
-- ✅ DEBUG=False
-- ✅ SECRET_KEY segura
-- ✅ ALLOWED_HOSTS configurado
-- ✅ CORS configurado correctamente
-- ✅ HTTPS habilitado
-- ✅ Variables de entorno seguras
-
-## 🆘 Troubleshooting
-
-### Errores Comunes
-1. **500 Error**: Revisar logs en Railway
-2. **CORS Error**: Verificar FRONTEND_URL
-3. **DB Error**: Verificar credenciales de Supabase
-4. **Static Files**: Railway maneja automáticamente con WhiteNoise
-
-### Comandos Útiles
+### 1. Preparación del Código
 ```bash
-# Ver logs en Railway
-railway logs
+# Asegurar que estás en la rama main
+git checkout main
+git pull origin main
 
-# Ejecutar migraciones manualmente
-railway run python manage.py migrate
-
-# Crear superusuario
-railway run python manage.py createsuperuser
+# Verificar que todos los cambios estén committeados
+git status
 ```
 
-## 🎉 ¡Listo!
+### 2. Despliegue Backend (Railway)
+- Los cambios en `main` se despliegan automáticamente
+- Railway detecta cambios y ejecuta build automático
+- Tiempo estimado: 2-5 minutos
 
-Tu aplicación estará disponible en:
-- **Frontend**: https://tu-app.vercel.app
-- **Backend**: https://tu-app.railway.app
-- **Admin**: https://tu-app.railway.app/admin
+### 3. Despliegue Frontend (Vercel)
+- Los cambios en `main` se despliegan automáticamente
+- Vercel ejecuta build y deploy automático
+- Tiempo estimado: 1-3 minutos
 
-## 📋 Variables de Entorno Completas
+### 4. Verificación Post-Despliegue
+```bash
+# Probar API
+curl https://proyectoplataformagestionproyectos-production-a320.up.railway.app/api/auth/users/
 
-### Railway (Backend):
-```env
-SECRET_KEY=django-insecure-jwgyxeu4yi=6eqz#xsgdqbfrzs^n38+=#oky6y9#sibiyjfx3y
-DEBUG=False
-ALLOWED_HOST=tu-app.railway.app
-DB_NAME=postgres
-DB_USER=postgres.ipdwhkwqmzoymyiswktl
-DB_PASSWORD=sly34lmpll
-DB_HOST=aws-1-sa-east-1.pooler.supabase.com
-DB_PORT=6543
-FRONTEND_URL=https://tu-app.vercel.app
+# Probar Frontend
+curl https://proyecto-plataforma-gestion-proyect.vercel.app/
 ```
 
-### Vercel (Frontend):
-```env
-VITE_API_URL=https://tu-app.railway.app/api
+## 🌿 **Gestión de Ramas**
+
+### Estructura de Ramas:
+- **`main`**: Producción (auto-deploy habilitado)
+- **`development`**: Desarrollo y testing
+- **`backup`**: Respaldo del código estable
+
+### Flujo de Trabajo:
+```bash
+# Desarrollo
+git checkout development
+git pull origin development
+# ... hacer cambios ...
+git add .
+git commit -m "feat: nueva funcionalidad"
+git push origin development
+
+# Deploy a producción
+git checkout main
+git merge development
+git push origin main  # Trigger auto-deploy
 ```
+
+## 🔍 **Troubleshooting**
+
+### Errores Comunes:
+
+#### 1. Error 502 (Bad Gateway)
+- **Causa**: Aplicación no responde en el puerto correcto
+- **Solución**: Verificar variable `PORT=8000` en Railway
+
+#### 2. Error CORS
+- **Causa**: Frontend no autorizado en backend
+- **Solución**: Verificar `FRONTEND_URL` en variables de Railway
+
+#### 3. Error de Base de Datos
+- **Causa**: Credenciales incorrectas o conexión fallida
+- **Solución**: Verificar variables `DB_*` en Railway
+
+#### 4. Build Failure
+- **Causa**: Dependencias faltantes o incompatibles
+- **Solución**: Verificar `requirements.txt` y `runtime.txt`
+
+### Logs y Monitoreo:
+- **Railway**: Logs en tiempo real en el dashboard
+- **Vercel**: Logs de build y runtime en el dashboard
+- **Supabase**: Métricas de base de datos en el panel
+
+## 📊 **Métricas de Rendimiento**
+
+### Tiempos de Respuesta Objetivo:
+- **API**: < 500ms
+- **Frontend**: < 2s (First Contentful Paint)
+- **Base de datos**: < 100ms (queries simples)
+
+### Límites de Recursos:
+- **Railway**: 500h/mes (plan gratuito)
+- **Vercel**: 100GB bandwidth/mes (plan gratuito)
+- **Supabase**: 500MB storage (plan gratuito)
+
+## 🔐 **Seguridad**
+
+### Configuraciones de Seguridad:
+- **HTTPS**: Habilitado en todos los servicios
+- **CORS**: Configurado específicamente para el frontend
+- **JWT**: Tokens con expiración configurada
+- **Variables de entorno**: Nunca expuestas en el código
+
+### Recomendaciones:
+- Rotar `SECRET_KEY` periódicamente
+- Monitorear logs de acceso
+- Mantener dependencias actualizadas
+- Usar `DEBUG=False` en producción
+
+## 📝 **Checklist de Despliegue**
+
+### Pre-Despliegue:
+- [ ] Código testeado localmente
+- [ ] Variables de entorno configuradas
+- [ ] Base de datos migrada
+- [ ] CORS configurado correctamente
+
+### Post-Despliegue:
+- [ ] API responde correctamente
+- [ ] Frontend carga sin errores
+- [ ] Autenticación funciona
+- [ ] CRUD operations funcionan
+- [ ] Logs sin errores críticos
+
+---
+
+## 🎯 **Estado Actual: ✅ PRODUCCIÓN ESTABLE**
+
+**Última actualización**: Septiembre 17, 2025
+**Versión**: 1.0.0
+**Estado**: 100% Funcional

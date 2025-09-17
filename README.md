@@ -6,6 +6,14 @@ Una aplicación web fullstack moderna para la gestión de proyectos y tareas con
 ![React](https://img.shields.io/badge/React-19-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-green)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen)
+
+## 🌐 **URLs de Producción**
+
+- **🌍 Frontend**: https://proyecto-plataforma-gestion-proyect.vercel.app
+- **🔧 Backend**: https://proyectoplataformagestionproyectos-production-a320.up.railway.app
+- **📡 API**: https://proyectoplataformagestionproyectos-production-a320.up.railway.app/api
+- **⚙️ Admin**: https://proyectoplataformagestionproyectos-production-a320.up.railway.app/admin
 
 ## ✨ Características
 
@@ -23,7 +31,7 @@ Una aplicación web fullstack moderna para la gestión de proyectos y tareas con
 - **Django 5.2.6** + **Django REST Framework**
 - **PostgreSQL** (Supabase)
 - **JWT Authentication**
-- **Python 3.13**
+- **Python 3.11**
 
 ### Frontend
 - **React 19** + **TypeScript**
@@ -35,11 +43,24 @@ Una aplicación web fullstack moderna para la gestión de proyectos y tareas con
 ## 🚀 Despliegue
 
 ### Producción
-- **Backend**: [Railway](https://railway.app) (500h gratis/mes)
-- **Frontend**: [Vercel](https://vercel.com) (gratis)
-- **Base de datos**: [Supabase](https://supabase.com) (gratis)
+- **Backend**: [Railway](https://railway.app) ✅ **DESPLEGADO**
+- **Frontend**: [Vercel](https://vercel.com) ✅ **DESPLEGADO**
+- **Base de datos**: [Supabase](https://supabase.com) ✅ **ACTIVA**
 
 Ver [DEPLOY.md](./DEPLOY.md) para instrucciones completas.
+
+## 🌿 **Ramas del Proyecto**
+
+- **`main`** - 🌟 Producción (estable)
+- **`development`** - 🔧 Desarrollo (nuevas features)
+- **`backup`** - 💾 Respaldo (código estable)
+
+### Flujo de Trabajo
+```bash
+git checkout development    # Trabajar en desarrollo
+git checkout main          # Cambiar a producción
+git merge development      # Mergear cuando esté listo
+```
 
 ## 🏗️ Estructura del Proyecto
 
@@ -52,7 +73,7 @@ proyecto_plataforma_gestion_proyectos/
 │   ├── tasks/              # App de tareas
 │   ├── requirements.txt    # Dependencias Python
 │   ├── Procfile           # Configuración Railway
-│   └── railway.json       # Configuración Railway
+│   └── runtime.txt        # Python 3.11
 ├── frontend/               # React App
 │   ├── src/
 │   │   ├── components/    # Componentes reutilizables
@@ -70,7 +91,7 @@ proyecto_plataforma_gestion_proyectos/
 ## 🚀 Instalación Local
 
 ### Prerrequisitos
-- Python 3.13+
+- Python 3.11+
 - Node.js 18+
 - pnpm
 - Cuenta en Supabase
@@ -135,9 +156,9 @@ pnpm run dev
 - **Admin Django**: http://localhost:8000/admin
 
 ### Producción
-- **Frontend**: https://tu-app.vercel.app
-- **Backend**: https://tu-app.railway.app
-- **Admin**: https://tu-app.railway.app/admin
+- **Frontend**: https://proyecto-plataforma-gestion-proyect.vercel.app
+- **Backend**: https://proyectoplataformagestionproyectos-production-a320.up.railway.app
+- **Admin**: https://proyectoplataformagestionproyectos-production-a320.up.railway.app/admin
 
 ## 🧪 Testing
 
@@ -147,14 +168,25 @@ El proyecto incluye un script de pruebas completas:
 ./test_complete_system.sh
 ```
 
+## 📊 **Estado del Proyecto**
+
+✅ **Backend**: Desplegado y funcionando  
+✅ **Frontend**: Desplegado y funcionando  
+✅ **Base de datos**: Conectada y operativa  
+✅ **Autenticación**: JWT funcionando  
+✅ **CORS**: Configurado correctamente  
+✅ **API**: Todos los endpoints activos  
+
 ## 📄 Licencia
 
 Este proyecto es parte de una prueba técnica fullstack.
 
 ## 👨‍💻 Autor
 
-Desarrollado con ❤️ usando las mejores prácticas de desarrollo fullstack.
+Desarrollado con ❤️ por **AdrianPhoenix** usando las mejores prácticas de desarrollo fullstack.
 
 ---
 
 ⭐ **¡Dale una estrella si te gusta el proyecto!**
+
+**🎯 Proyecto 100% funcional en producción** - Septiembre 2025
