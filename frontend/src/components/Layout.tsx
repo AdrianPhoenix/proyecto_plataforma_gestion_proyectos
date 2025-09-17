@@ -58,9 +58,9 @@ const Layout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex">
+    <div className="min-h-screen min-h-dvh bg-neutral-50 flex">
       {/* Sidebar */}
-      <div className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} fixed inset-y-0 left-0 z-50 w-72 gradient-sidebar shadow-2xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 flex flex-col`}>
+      <div className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} fixed inset-y-0 left-0 z-50 w-72 h-screen h-dvh gradient-sidebar shadow-2xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 flex flex-col overflow-hidden`}>
         {/* Logo/Brand */}
         <div className="flex items-center justify-center h-20 px-6 border-b border-neutral-700/30 flex-shrink-0">
           <div className="flex items-center space-x-3">
@@ -77,8 +77,8 @@ const Layout = () => {
         </div>
         
         {/* Navigation */}
-        <nav className="flex-1 px-6 py-8">
-          <div className="space-y-2">
+        <nav className="flex-1 px-6 py-6 overflow-hidden">
+          <div className="space-y-2 h-full flex flex-col justify-start">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -109,8 +109,8 @@ const Layout = () => {
         </nav>
 
         {/* Quick Stats */}
-        <div className="px-6 pb-6 flex-shrink-0">
-          <div className="p-5 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
+        <div className="px-6 pb-4 flex-shrink-0">
+          <div className="p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
             <h3 className="text-sm font-semibold text-neutral-200 mb-4 flex items-center">
               <svg className="w-4 h-4 mr-2 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H9z" />
@@ -135,15 +135,15 @@ const Layout = () => {
         </div>
 
         {/* User Profile */}
-        <div className="p-6 border-t border-white/10 bg-black/20 backdrop-blur-sm flex-shrink-0">
-          <div className="flex items-center space-x-4 mb-5">
+        <div className="p-4 border-t border-white/10 bg-black/20 backdrop-blur-sm flex-shrink-0">
+          <div className="flex items-center space-x-3 mb-4">
             <div className="relative">
-              <div className="w-12 h-12 gradient-primary rounded-full flex items-center justify-center shadow-lg ring-2 ring-primary-500/30">
-                <span className="text-white font-bold text-lg">
+              <div className="w-10 h-10 gradient-primary rounded-full flex items-center justify-center shadow-lg ring-2 ring-primary-500/30">
+                <span className="text-white font-bold text-base">
                   {user?.username?.charAt(0).toUpperCase()}
                 </span>
               </div>
-              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-neutral-800 animate-pulse"></div>
+              <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-neutral-800 animate-pulse"></div>
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-white truncate">
@@ -161,7 +161,7 @@ const Layout = () => {
           
           <button
             onClick={logout}
-            className="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2.5 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md focus:ring-2 focus:ring-red-500 focus:ring-offset-2 flex items-center justify-center"
+            className="w-full bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-sm hover:shadow-md focus:ring-2 focus:ring-red-500 focus:ring-offset-2 flex items-center justify-center"
           >
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
