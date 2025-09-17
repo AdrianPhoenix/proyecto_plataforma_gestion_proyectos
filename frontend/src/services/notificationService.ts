@@ -1,5 +1,27 @@
-import api from './api';
+import axios from 'axios';
 import type { NotificationResponse, Notification } from '../types/notification';
+
+// Crear instancia de axios para notificaciones
+const API_BASE_URL = import.meta.env.VITE_API_URL || 
+  (import.meta.env.MODE === 'production' 
+    ? 'https://proyectoplataformagestionproyectos-production-a320.up.railway.app/api'
+    : 'http://localhost:8000/api');
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Interceptor para agregar token
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('access_token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
 export const notificationService = {
   // Obtener notificaciones del usuario
