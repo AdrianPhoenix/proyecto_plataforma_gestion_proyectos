@@ -166,8 +166,54 @@ pnpm run dev
 
 ## 🧪 Testing
 
-El proyecto incluye un script de pruebas completas:
+### **👥 Usuarios de Prueba Creados**
 
+El sistema incluye 6 usuarios de prueba con datos completos:
+
+#### **👑 Administrador**
+- **Email**: admin@test.com
+- **Password**: admin123
+- **Rol**: Administrador
+- **Permisos**: Control total del sistema
+
+#### **👨‍💻 Colaboradores**
+- **Email**: collab3@test.com
+- **Password**: test1234
+- **Rol**: Colaborador
+- **Asignado a**: Sistema Web Empresarial (1 tarea activa)
+
+- **Email**: collab1@test.com
+- **Password**: test1234
+- **Rol**: Colaborador
+- **Asignado a**: Sistema Web Empresarial (1 tarea activa)
+
+- **Email**: collab2@test.com
+- **Password**: test1234
+- **Rol**: Colaborador
+- **Asignado a**: App Mobile E-commerce (1 tarea activa)
+
+#### **👁️ Visores**
+- **Email**: viewer1@test.com
+- **Password**: test1234
+- **Rol**: Visor
+- **Acceso a**: 2 proyectos (puede ver todas las tareas)
+
+- **Email**: viewer2@test.com
+- **Password**: test1234
+- **Rol**: Visor
+
+- **Email**: viewer3@test.com
+- **Password**: test1234
+- **Rol**: Visor
+
+### **📊 Datos de Prueba Incluidos**
+- ✅ **3 proyectos** con diferentes estados
+- ✅ **3 tareas** asignadas a colaboradores
+- ✅ **Comentarios** en todas las tareas
+- ✅ **Notificaciones** automáticas
+- ✅ **Sistema de roles** completamente funcional
+
+### **🚀 Script de Pruebas**
 ```bash
 ./test_complete_system.sh
 ```

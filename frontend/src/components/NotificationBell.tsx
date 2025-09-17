@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { notificationService } from '../services/notificationService';
 import type { Notification } from '../types/notification';
