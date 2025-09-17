@@ -80,7 +80,7 @@ const NotificationBell: React.FC = () => {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border z-50">
+        <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border z-[9999]">
           <div className="p-4 border-b">
             <div className="flex justify-between items-center">
               <h3 className="font-semibold text-gray-900">Notificaciones</h3>
