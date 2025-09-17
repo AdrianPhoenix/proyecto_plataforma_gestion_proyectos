@@ -1,6 +1,7 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import NotificationBell from './NotificationBell';
 
 const Layout = () => {
   const { user, logout } = useAuth();
@@ -187,7 +188,14 @@ const Layout = () => {
               </svg>
             </button>
             <h1 className="text-lg font-semibold text-gray-900">ProjectHub</h1>
-            <div className="w-6"></div>
+            <NotificationBell />
+          </div>
+        </div>
+
+        {/* Desktop notification bar */}
+        <div className="hidden lg:block bg-white shadow-sm border-b border-gray-200">
+          <div className="flex items-center justify-end h-16 px-6">
+            <NotificationBell />
           </div>
         </div>
 
