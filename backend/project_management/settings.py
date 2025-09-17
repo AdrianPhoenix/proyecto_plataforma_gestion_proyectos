@@ -171,6 +171,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://proyecto-plataforma-gestion-proyect.vercel.app",
+    config('FRONTEND_URL', default=''),
 ]
 
 CORS_ALLOW_CREDENTIALS = True
