@@ -60,7 +60,7 @@ const Layout = () => {
   return (
     <div className="min-h-screen min-h-dvh bg-neutral-50 flex">
       {/* Sidebar */}
-      <div className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} fixed inset-y-0 left-0 z-50 w-72 h-screen h-dvh gradient-sidebar shadow-2xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 flex flex-col overflow-hidden`}>
+      <div className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} fixed inset-y-0 left-0 z-50 w-72 h-screen h-dvh gradient-sidebar shadow-2xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:fixed lg:inset-y-0 lg:left-0 flex flex-col overflow-hidden`}>
         {/* Logo/Brand */}
         <div className="flex items-center justify-center h-20 px-6 border-b border-neutral-700/30 flex-shrink-0">
           <div className="flex items-center space-x-3">
@@ -180,7 +180,7 @@ const Layout = () => {
       )}
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col lg:ml-0">
+      <div className="flex-1 flex flex-col lg:ml-72">
         {/* Top bar */}
         <div className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-neutral-200 lg:hidden">
           <div className="flex items-center justify-between h-16 px-4">
