@@ -1,5 +1,30 @@
-@import './styles/colors.css';
 @import "tailwindcss";
+
+@theme {
+  /* Colores Azules Principales */
+  --color-primary-50: oklch(0.97 0.013 250);
+  --color-primary-100: oklch(0.93 0.038 250);
+  --color-primary-200: oklch(0.86 0.074 250);
+  --color-primary-300: oklch(0.76 0.123 250);
+  --color-primary-400: oklch(0.65 0.165 250);
+  --color-primary-500: oklch(0.55 0.197 250);
+  --color-primary-600: oklch(0.45 0.218 250);
+  --color-primary-700: oklch(0.37 0.231 250);
+  --color-primary-800: oklch(0.29 0.234 250);
+  --color-primary-900: oklch(0.23 0.226 250);
+
+  /* Grises Neutros */
+  --color-neutral-50: oklch(0.98 0.004 250);
+  --color-neutral-100: oklch(0.96 0.006 250);
+  --color-neutral-200: oklch(0.90 0.011 250);
+  --color-neutral-300: oklch(0.83 0.014 250);
+  --color-neutral-400: oklch(0.64 0.015 250);
+  --color-neutral-500: oklch(0.49 0.016 250);
+  --color-neutral-600: oklch(0.39 0.015 250);
+  --color-neutral-700: oklch(0.32 0.013 250);
+  --color-neutral-800: oklch(0.24 0.012 250);
+  --color-neutral-900: oklch(0.15 0.014 250);
+}
 
 @layer base {
   * {
@@ -12,8 +37,8 @@
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     font-weight: 400;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    background-color: theme(colors.neutral.50);
+    color: theme(colors.neutral.900);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -26,114 +51,34 @@
   }
   
   ::-webkit-scrollbar-track {
-    background: var(--gray-100);
+    background: theme(colors.neutral.100);
   }
   
   ::-webkit-scrollbar-thumb {
-    background: var(--gray-300);
+    background: theme(colors.neutral.300);
     border-radius: 3px;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--gray-400);
+    background: theme(colors.neutral.400);
   }
 }
 
-@layer components {
-  /* Botones */
-  .btn-primary {
-    @apply bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
-  }
-  
-  .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-gray-700 px-4 py-2.5 rounded-lg font-medium transition-all duration-200 border border-gray-300 shadow-sm hover:shadow-md;
-  }
-  
-  .btn-outline {
-    @apply border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2.5 rounded-lg font-medium transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
-  }
+/* Gradientes personalizados */
+.gradient-primary {
+  background: linear-gradient(135deg, theme(colors.primary.600) 0%, theme(colors.primary.700) 100%);
+}
 
-  .btn-danger {
-    @apply bg-red-600 hover:bg-red-700 text-white px-4 py-2.5 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
-  }
+.gradient-sidebar {
+  background: linear-gradient(180deg, theme(colors.neutral.800) 0%, theme(colors.neutral.900) 100%);
+}
 
-  /* Cards */
-  .card {
-    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6 transition-all duration-200;
-  }
-  
-  .card-hover {
-    @apply card hover:shadow-lg hover:border-gray-300 cursor-pointer transform hover:-translate-y-1;
-  }
+/* Animaciones */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
 
-  /* Inputs */
-  .input-field {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white placeholder-gray-400;
-  }
-
-  .input-error {
-    @apply input-field border-red-300 focus:ring-red-500 focus:border-red-500;
-  }
-
-  /* Status badges */
-  .status-pending {
-    @apply bg-yellow-100 text-yellow-800 px-3 py-1.5 rounded-full text-sm font-medium inline-flex items-center;
-  }
-  
-  .status-in_progress {
-    @apply bg-blue-100 text-blue-800 px-3 py-1.5 rounded-full text-sm font-medium inline-flex items-center;
-  }
-  
-  .status-completed {
-    @apply bg-green-100 text-green-800 px-3 py-1.5 rounded-full text-sm font-medium inline-flex items-center;
-  }
-  
-  .status-cancelled {
-    @apply bg-red-100 text-red-800 px-3 py-1.5 rounded-full text-sm font-medium inline-flex items-center;
-  }
-
-  /* Role badges */
-  .role-admin {
-    @apply bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs font-medium;
-  }
-  
-  .role-collaborator {
-    @apply bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium;
-  }
-  
-  .role-viewer {
-    @apply bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-xs font-medium;
-  }
-
-  /* Gradientes modernos */
-  .gradient-primary {
-    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-  }
-  
-  .gradient-sidebar {
-    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-  }
-  
-  .gradient-card {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  }
-
-  /* Animaciones */
-  .fade-in {
-    animation: fadeIn 0.3s ease-in-out;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .slide-in {
-    animation: slideIn 0.3s ease-out;
-  }
-  
-  @keyframes slideIn {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(0); }
-  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
