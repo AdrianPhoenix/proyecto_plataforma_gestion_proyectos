@@ -193,7 +193,9 @@ const Layout = () => {
               </svg>
             </button>
             <h1 className="text-lg font-semibold text-neutral-900">ProjectHub</h1>
-            <NotificationBell />
+            <div className="relative z-[9999]">
+              <NotificationBell />
+            </div>
           </div>
         </div>
 
@@ -206,7 +208,9 @@ const Layout = () => {
               </h2>
               <div className="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
             </div>
-            <NotificationBell />
+            <div className="relative z-[9999]">
+              <NotificationBell />
+            </div>
           </div>
         </div>
 

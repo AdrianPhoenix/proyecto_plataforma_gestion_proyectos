@@ -22,8 +22,11 @@ Una aplicación web fullstack moderna para la gestión de proyectos y tareas con
 - 📋 **Gestión de proyectos** con miembros
 - ✅ **Gestión de tareas** con asignaciones
 - 💬 **Sistema de comentarios**
+- 🔔 **Notificaciones en tiempo real**
+- 🎨 **Diseño moderno** con Tailwind v4 y colores OKLCH
 - 📱 **Interfaz responsiva** y moderna
 - 🔒 **Seguridad** con permisos granulares
+- 📌 **Sidebar fijo** sin scroll
 
 ## 🛠️ Tecnologías
 
@@ -35,10 +38,11 @@ Una aplicación web fullstack moderna para la gestión de proyectos y tareas con
 
 ### Frontend
 - **React 19** + **TypeScript**
-- **Vite** + **Tailwind CSS**
+- **Vite** + **Tailwind CSS v4**
 - **React Router DOM**
 - **React Hook Form** + **Zod**
 - **Axios**
+- **Colores OKLCH** modernos
 
 ## 🚀 Despliegue
 

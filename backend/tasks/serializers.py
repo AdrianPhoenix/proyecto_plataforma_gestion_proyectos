@@ -50,3 +50,14 @@ class TaskCreateSerializer(serializers.ModelSerializer):
             validated_data['assigned_to'] = User.objects.get(id=assigned_to_id)
         
         return super().create(validated_data)
+    
+    def update(self, instance, validated_data):
+        assigned_to_id = validated_data.pop('assigned_to_id', None)
+        
+        if assigned_to_id:
+            from authentication.models import User
+            validated_data['assigned_to'] = User.objects.get(id=assigned_to_id)
+        elif assigned_to_id is None:
+            validated_data['assigned_to'] = None
+            
+        return super().update(instance, validated_data)
