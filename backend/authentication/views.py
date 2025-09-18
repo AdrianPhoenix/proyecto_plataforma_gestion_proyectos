@@ -9,9 +9,14 @@ from .serializers import UserSerializer, UserRegistrationSerializer, LoginSerial
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register(request):
+    """
+    Registra un nuevo usuario en el sistema.
+    Genera automáticamente tokens JWT para autenticación inmediata.
+    """
     serializer = UserRegistrationSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save()
+        # Generar tokens JWT para el nuevo usuario
         refresh = RefreshToken.for_user(user)
         return Response({
             'user': UserSerializer(user).data,
@@ -23,9 +28,14 @@ def register(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def login(request):
+    """
+    Autentica un usuario existente.
+    Valida credenciales y retorna tokens JWT si son correctas.
+    """
     serializer = LoginSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.validated_data['user']
+        # Generar tokens JWT para el usuario autenticado
         refresh = RefreshToken.for_user(user)
         return Response({
             'user': UserSerializer(user).data,
@@ -37,10 +47,18 @@ def login(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def profile(request):
+    """
+    Obtiene el perfil del usuario autenticado.
+    Requiere token JWT válido.
+    """
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
 
 class UserListView(generics.ListAPIView):
+    """
+    Lista todos los usuarios del sistema.
+    Usado para asignar miembros a proyectos y tareas.
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]

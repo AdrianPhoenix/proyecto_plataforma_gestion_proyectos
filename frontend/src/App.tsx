@@ -9,9 +9,14 @@ import Projects from './pages/Projects';
 import Tasks from './pages/Tasks';
 import Layout from './components/Layout';
 
+/**
+ * Componente para proteger rutas que requieren autenticación.
+ * Redirige al login si el usuario no está autenticado.
+ */
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, loading } = useAuth();
   
+  // Mostrar spinner mientras se verifica la autenticación
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -23,9 +28,14 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
 };
 
+/**
+ * Componente para rutas públicas (login, register).
+ * Redirige al dashboard si el usuario ya está autenticado.
+ */
 const PublicRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, loading } = useAuth();
   
+  // Mostrar spinner mientras se verifica la autenticación
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -37,9 +47,14 @@ const PublicRoute = ({ children }: { children: React.ReactNode }) => {
   return isAuthenticated ? <Navigate to="/dashboard" /> : <>{children}</>;
 };
 
+/**
+ * Configuración de rutas de la aplicación.
+ * Maneja rutas públicas y protegidas.
+ */
 function AppRoutes() {
   return (
     <Routes>
+      {/* Rutas públicas */}
       <Route path="/login" element={
         <PublicRoute>
           <Login />
@@ -50,6 +65,8 @@ function AppRoutes() {
           <Register />
         </PublicRoute>
       } />
+      
+      {/* Rutas protegidas con layout */}
       <Route path="/" element={
         <ProtectedRoute>
           <Layout />
@@ -64,6 +81,10 @@ function AppRoutes() {
   );
 }
 
+/**
+ * Componente principal de la aplicación.
+ * Configura providers y estructura base.
+ */
 function App() {
   return (
     <NotificationProvider>
