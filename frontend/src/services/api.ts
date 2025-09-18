@@ -2,12 +2,21 @@ import axios from 'axios';
 import type { AuthResponse, User, Project, Task, TaskComment } from '../types';
 import type { LoginFormData, RegisterFormData, ProjectFormData, TaskFormData, CommentFormData } from '../utils/schemas';
 
+/**
+ * Configuración de la API
+ * Maneja automáticamente URLs según el entorno y autenticación JWT
+ */
+
 // API Base URL - cambia automáticamente según el entorno
 const API_BASE_URL = import.meta.env.VITE_API_URL || 
   (import.meta.env.MODE === 'production' 
     ? 'https://your-railway-app.railway.app/api'  // Cambiar por tu URL de Railway
     : 'http://localhost:8000/api');
 
+/**
+ * Instancia de Axios configurada para la API
+ * Incluye interceptores para manejo automático de tokens
+ */
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -15,7 +24,10 @@ const api = axios.create({
   },
 });
 
-// Interceptor para agregar token
+/**
+ * Interceptor de request - Agrega token de autorización
+ * Se ejecuta antes de cada petición HTTP
+ */
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('access_token');
   if (token) {
@@ -24,7 +36,15 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Interceptor para manejar refresh token
+/**
+ * Interceptor de response - Maneja refresh de tokens
+ * Se ejecuta después de cada respuesta HTTP
+ * 
+ * Si recibe 401 (Unauthorized):
+ * 1. Intenta renovar el token con refresh_token
+ * 2. Reintenta la petición original
+ * 3. Si falla, redirige al login
+ */
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
